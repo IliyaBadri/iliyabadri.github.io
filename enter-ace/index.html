@@ -13,57 +13,64 @@
     <h4 class="w3-right-align w3-margin">Enter ACE</h4>
 </div>
 
-  <div id="readme-container"></div>
+<div id="readme-container"></div>
 
-  <script>
-    // GitHub repository information
-    const username = 'IliyaBadri';
-    const repository = 'EnterACE';
+<script>
+  // GitHub repository information
+  const username = 'IliyaBadri';
+  const repository = 'EnterACE';
 
-    // Fetch repository tree structure from GitHub API
-    fetch(`https://api.github.com/repos/${username}/${repository}/git/trees/main?recursive=1`)
-      .then(response => response.json())
-      .then(data => {
-        // Find all folders in the tree
-        const folders = data.tree.filter(item => item.type === 'tree');
+  // Fetch repository HTML page
+  fetch(`https://github.com/${username}/${repository}`)
+    .then(response => response.text())
+    .then(html => {
+      // Create a temporary element to parse the HTML
+      const tempElement = document.createElement('div');
+      tempElement.innerHTML = html;
 
-        // Create a recursive function to build the tree structure
-        const buildTree = (parent, items) => {
-          const ul = document.createElement('ul');
+      // Find the repository file tree element
+      const fileTreeElement = tempElement.querySelector('.js-tree-browser');
 
-          items.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item.path;
-            ul.appendChild(li);
+      // Create the tree structure
+      const buildTree = (parent, element) => {
+        const ul = document.createElement('ul');
 
-            const folderItems = data.tree.filter(childItem =>
-              childItem.type === 'tree' && childItem.path.startsWith(item.path + '/')
-            );
+        // Find all directory elements in the current element
+        const folderElements = Array.from(element.querySelectorAll('.js-navigation-item.directory'));
 
-            if (folderItems.length > 0) {
-              const subtree = buildTree(item.path, folderItems);
-              li.appendChild(subtree);
-            }
-          });
+        folderElements.forEach(folderElement => {
+          const folderPath = folderElement.querySelector('.js-navigation-open').getAttribute('title');
+          const li = document.createElement('li');
+          li.textContent = folderPath;
+          ul.appendChild(li);
 
-          return ul;
-        };
+          // Find the nested directory element
+          const nestedFileTreeElement = folderElement.querySelector('.js-navigation-container');
 
-        // Create the tree structure
-        const tree = buildTree('', folders);
+          if (nestedFileTreeElement) {
+            const subtree = buildTree(folderPath, nestedFileTreeElement);
+            li.appendChild(subtree);
+          }
+        });
 
-        // Create a new HTML element to display the tree
-        const treeElement = document.createElement('div');
-        treeElement.classList.add('tree');
-        treeElement.appendChild(tree);
+        return ul;
+      };
 
-        // Append the tree element to the container
-        const container = document.getElementById('readme-container');
-        container.appendChild(treeElement);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  </script>
+      // Build the tree structure
+      const tree = buildTree('', fileTreeElement);
+
+      // Create a new HTML element to display the tree
+      const treeElement = document.createElement('div');
+      treeElement.classList.add('tree');
+      treeElement.appendChild(tree);
+
+      // Append the tree element to the container
+      const container = document.getElementById('readme-container');
+      container.appendChild(treeElement);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+</script>
 </body>
 </html> 
