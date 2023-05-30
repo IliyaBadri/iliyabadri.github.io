@@ -9,17 +9,61 @@
     body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
 <body>
-
-
 <div class="w3-container w3-light-blue w3-bar">
-    <button class="w3-margin w3-button w3-green" onclick="location.href = 'https://enterace--iliyabadri.repl.co'">Applications</button>
     <h4 class="w3-right-align w3-margin">Enter ACE</h4>
-    
 </div>
 
-<div class="w3-container w3-margin w3-border w3-animate-right">
-  <p>Enter ACE is an software development group. Enter ACE repositories contain open-source applications suitable for your problems. Enter ACE will do everything possible to keep you up-to-date and more importantly secure.</p>
-</div>
+  <div id="readme-container"></div>
 
+  <script>
+    // GitHub repository information
+    const username = 'IliyaBadri';
+    const repository = 'EnterACE';
+
+    // Fetch repository tree structure from GitHub API
+    fetch(`https://api.github.com/repos/${username}/${repository}/git/trees/main?recursive=1`)
+      .then(response => response.json())
+      .then(data => {
+        // Find all folders in the tree
+        const folders = data.tree.filter(item => item.type === 'tree');
+
+        // Create a recursive function to build the tree structure
+        const buildTree = (parent, items) => {
+          const ul = document.createElement('ul');
+
+          items.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.path;
+            ul.appendChild(li);
+
+            const folderItems = data.tree.filter(childItem =>
+              childItem.type === 'tree' && childItem.path.startsWith(item.path + '/')
+            );
+
+            if (folderItems.length > 0) {
+              const subtree = buildTree(item.path, folderItems);
+              li.appendChild(subtree);
+            }
+          });
+
+          return ul;
+        };
+
+        // Create the tree structure
+        const tree = buildTree('', folders);
+
+        // Create a new HTML element to display the tree
+        const treeElement = document.createElement('div');
+        treeElement.classList.add('tree');
+        treeElement.appendChild(tree);
+
+        // Append the tree element to the container
+        const container = document.getElementById('readme-container');
+        container.appendChild(treeElement);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
 </body>
 </html> 
