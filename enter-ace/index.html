@@ -8,75 +8,116 @@
 <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
-<body>
-<div class="w3-container w3-light-blue w3-bar">
-    <h4 class="w3-right-align w3-margin">Enter ACE</h4>
+<body class="w3-black">
+<div class="w3-container w3-dark-gray w3-bar">
+    <h2 class="w3-margin">Enter ACE</h2>
 </div>
 
-<div id="readme-container"></div>
+<div class="w3-bar w3-padding">
+  <div class="w3-bar-item w3-round" id="markdownout" style="width: 74%; margin-right: 1%; background-color: rgb(36, 36, 36);">
+  </div>
+  <div class="w3-bar-item w3-round-xxlarge w3- w3-green" style="width: 25%;">
+    <div class="w3-center w3-bar"><input class="w3-input w3-round-xxlarge w3 w3-amber w3-bar-item" style="width: calc(100% - 50px);" placeholder="Search . . ." type="text" id="serachinput"><button onclick="search();" style="width: 50px;" class="w3-button w3-round-xxlarge w3-aqua w3-bar-item">Go</button></div>
+    <div class="w3-padding" id="markdownlist"></div>
+  </div>
+</div>
+<script src="
+https://cdn.jsdelivr.net/npm/marked@5.0.3/lib/marked.umd.min.js
+"></script>
 
 <script>
-  // GitHub repository information
-  const username = 'IliyaBadri';
-  const repository = 'EnterACE';
 
-  // Fetch repository HTML page
-  fetch(`https://github.com/${username}/${repository}`,{
-    method: 'POST',
-		headers: {
-			'Access-Control-Allow-Origin': 'https://iliyabadri.github.io/',
-			'Access-Control-Allow-Credentials': 'true',
-		},
+writeMarkdown("# Nothing selected")
+root = "https://raw.githubusercontent.com/IliyaBadri/EnterACE/main"
+
+
+fetch(`${root}/meta.json`)
+  .then(response => response.json())
+  .then(data => {
+    storeList(data.doc_list)
+    listDocuments(data.doc_list);
   })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+var StoredList;
+function storeList(TheList){
+  StoredList = TheList
+}
+function search(){
+  searchInput = document.getElementById("serachinput")
+  input = searchInput.value.toLowerCase();
+  theCurrentList = getStoredList()
+
+  var filteredList = theCurrentList.filter(function(item) {
+    var lowerCaseItem = item.Name.toLowerCase();
+    return lowerCaseItem.includes(input);
+  });
+
+  
+
+  listDocuments(filteredList)
+}
+
+function getStoredList(){
+  return StoredList;
+}
+function listDocuments(DocList){
+
+  var listElement = document.getElementById('markdownlist');
+
+  listElement.replaceChildren()
+
+  DocList.forEach(function(item) {
+    // Create a div element for each item
+    var itemDiv = document.createElement('div');
+    itemDiv.classList.value = "w3-white w3-round w3-padding w3-margin-bottom"
+
+    // Create a p element
+    var pElement = document.createElement('p');
+    pElement.textContent = item.Name
+
+    // Create a button element for the action
+    var buttonElement = document.createElement('button');
+    buttonElement.textContent = "Open";
+    buttonElement.addEventListener('click', function() {
+      getMarkdown(root + item.Location);
+    });
+
+    itemDiv.appendChild(pElement)
+    itemDiv.appendChild(buttonElement);
+    
+    // Append the item div to the list element
+    listElement.appendChild(itemDiv);
+  });
+
+}
+
+function getMarkdown(markdownURL){
+  
+  fetch(markdownURL)
     .then(response => response.text())
-    .then(html => {
-      // Create a temporary element to parse the HTML
-      const tempElement = document.createElement('div');
-      tempElement.innerHTML = html;
-
-      // Find the repository file tree element
-      const fileTreeElement = tempElement.querySelector('.js-tree-browser');
-
-      // Create the tree structure
-      const buildTree = (parent, element) => {
-        const ul = document.createElement('ul');
-
-        // Find all directory elements in the current element
-        const folderElements = Array.from(element.querySelectorAll('.js-navigation-item.directory'));
-
-        folderElements.forEach(folderElement => {
-          const folderPath = folderElement.querySelector('.js-navigation-open').getAttribute('title');
-          const li = document.createElement('li');
-          li.textContent = folderPath;
-          ul.appendChild(li);
-
-          // Find the nested directory element
-          const nestedFileTreeElement = folderElement.querySelector('.js-navigation-container');
-
-          if (nestedFileTreeElement) {
-            const subtree = buildTree(folderPath, nestedFileTreeElement);
-            li.appendChild(subtree);
-          }
-        });
-
-        return ul;
-      };
-
-      // Build the tree structure
-      const tree = buildTree('', fileTreeElement);
-
-      // Create a new HTML element to display the tree
-      const treeElement = document.createElement('div');
-      treeElement.classList.add('tree');
-      treeElement.appendChild(tree);
-
-      // Append the tree element to the container
-      const container = document.getElementById('readme-container');
-      container.appendChild(treeElement);
+    .then(data => {
+      const markdownContents = data;
+      writeMarkdown(markdownContents)
     })
     .catch(error => {
       console.error('Error:', error);
     });
+  
+}
+
+function convertMarkdownToHTML(markdown) {
+  var html = marked.parse(markdown);
+  return html;
+}
+
+function writeMarkdown(markdown){
+  StandardContent = convertMarkdownToHTML(markdown)
+  document.getElementById('markdownout').innerHTML = StandardContent;
+}
+
 </script>
 </body>
 </html> 
