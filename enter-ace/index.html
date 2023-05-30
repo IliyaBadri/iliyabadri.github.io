@@ -19,9 +19,10 @@
   // GitHub repository information
   const username = 'IliyaBadri';
   const repository = 'EnterACE';
+  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
   // Fetch repository HTML page
-  fetch(`https://github.com/${username}/${repository}`)
+  fetch(`${proxyUrl}https://github.com/${username}/${repository}`)
     .then(response => response.text())
     .then(html => {
       // Create a temporary element to parse the HTML
