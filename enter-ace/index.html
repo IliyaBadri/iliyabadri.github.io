@@ -124,6 +124,8 @@ function listDocuments(DocList){
 }
 
 function getMarkdown(markdownURL){
+
+  w3_close()
   
   fetch(markdownURL)
     .then(response => response.text())
