@@ -52,14 +52,14 @@ div.ea-main-container div.ea-hero button{
     border-radius: var(--round-edges);
     align-self: flex-end;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
     padding: var(--button-padding);
 }
 
 div.ea-main-container div.ea-hero button:hover{
     background-color: var(--color-1);
     color: var(--color-4);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out;
 
 }
 
