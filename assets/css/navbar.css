@@ -6,11 +6,12 @@
     --font: 'Exo';
     --round-edges: 5px;
     --items-height: 50px;
+    --img-size: 25px;
     --items-margin: 10px;
     --button-padding: 5px;
 }
 
-nav.ea-nav {
+nav.NavigationBar {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,90 +20,72 @@ nav.ea-nav {
     z-index: 900;
 }
 
-nav button.ea-open-menu{
-    background-color: var(--color-1);
-    font-family: var(--font);
-    font-size: large;
-    transition: color 0.3s ease;
-    border-radius: var(--round-edges);
-    display: none;
-    padding: var(--button-padding);
-    border: none;
-    height: var(--items-height);
-    width: var(--items-height);
-    margin: var(--items-margin);
-    color: var(--color-4);
-    float: right;
-    cursor: pointer;
+nav.Transparent {
+    background-color: rgba(0, 0, 0, 0);
 }
 
-nav button.ea-open-menu:hover{
-    transition: color 0.3s ease;
+nav.Colored {
     background-color: var(--color-4);
-    color: var(--color-1);
 }
 
-nav button.open-panel{
-    background-color: rgba(0, 0, 0, 0);
-    font-weight: bold;
-    font-family: var(--font);
-    font-size: large;
-    transition: color 0.3s ease;
+img.ButtonSized {
+    height: var(--img-size);
+}
+
+img.InDark {
+    filter: invert(1);
+}
+
+button.PanelOpener {
+    display: none;
+    margin: var(--items-margin);
+    width: var(--min-width);
+    height: var(--min-width);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+button.NavigationItem {
     text-align: left;
-    padding: var(--button-padding);
-    border: none;
-    height: var(--items-height);
-    margin: var(--items-margin);
-    color: var(--color-4);
     float: right;
-    cursor: pointer;
 }
 
-nav button.open-panel:hover{
-    color: var(--color-3);
-}
-
-nav button.ea-logo {
-    background-color: rgba(0, 0, 0, 0);
-    height: var(--items-height);
-    margin: var(--items-margin);
-    font-family: var(--font);
-    margin-left: 20vw;
+button.NavigationLogo {
     float: left;
-    font-size: x-large;
-    border: none;
-    font-weight: bolder;
-    cursor: pointer;
-
-    color: var(--color-4);
+    margin-left: 20vw;
 }
 
-nav.ea-nav div.ea-item-list {
+div.NavigationItemList {
     margin-right: 20vw;
 }
 
 @media (max-width: 920px) {
-    nav.ea-nav button.ea-open-menu{
-        display: block;
+
+    button.PanelOpener {
+        display: flex;
     }
 
-    nav.ea-nav button.ea-logo {
-        margin-left: var(--items-margin);
-    }
-
-    nav.ea-nav div.ea-item-list {
-        position: fixed;
+    div.NavigationItemList {
+        position: absolute;
+        background-color: var(--color-2);
+        top: 0;
+        left: 0;
         height: 100vh;
         width: 50vw;
-        margin-right: var(--items-margin);
-        background-color: var(--color-4);
+        z-index: 1100;
+        margin: 0;
     }
 
-    nav.ea-nav button.open-panel{
-        color: var(--color-1);
+    button.NavigationItem {
+        color: var(--color-4);
     }
 
-    nav.ea-nav button.open-panel:hover{
-        color: var(--color-2);
+    button.NavigationItem:hover {
+        color: var(--color-3);
+    }
+
+    button.NavigationLogo {
+        margin-left: var(--items-margin);
     }
 }

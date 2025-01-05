@@ -10,65 +10,70 @@
     --font: 'Exo';
 }
 
-body.ea-fullscreen-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+body.Style {
     font-family: var(--font);
     background-color: var(--color-1);
 }
 
-div.ea-main-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 20vw;
-    margin-left: 20vw;
-    flex-wrap: wrap;
-    width: calc(100% - 40vw);
+body.Scrollable {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body.FullScreen {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+div.FullScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
 }
 
-div.ea-main-container div.ea-hero {
+div.CenterContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.ListInRows {
     display: flex;
     flex-direction: column;
 }
 
-div.ea-main-container div.ea-hero h1{
-    font-size: clamp(1.5rem, 4vw, 5rem);
+div.ListInColumns {
+    display: flex;
+    flex-direction: row;
 }
 
-div.ea-main-container div.ea-hero p{
+h1.Style {
+    font-weight: bolder;
+    font-size: clamp(2rem, 4vw, 5rem);
+}
+
+p.Style{
+    font-size: clamp(0.75rem, 1vw, 5rem);
+}
+
+p.CustomMargin {
     margin-left: var(--text-indent);
-    font-size: clamp(1rem, 1vw, 5rem);
-}
-
-div.ea-main-container div.ea-hero button{
-    border: none;
-    font-family: var(--font);
-    font-size: clamp(1rem, 1vw, 5rem);
-    background-color: var(--color-4);
-    color: var(--color-1);
-    border-radius: var(--round-edges);
-    align-self: flex-end;
-    cursor: pointer;
-    transition: all 0.3s ease-out;
-    padding: var(--button-padding);
-}
-
-div.ea-main-container div.ea-hero button:hover{
-    background-color: var(--color-1);
-    color: var(--color-4);
-    transition: all 0.3s ease-out;
-
+    margin-right: 10vw;
 }
 
 @media (max-width: 920px) {
-    div.ea-main-container {
-        justify-content: center;
+    p.CustomMargin {
+        margin-left: var(--text-indent);
         margin-right: var(--items-margin);
-        margin-left: var(--items-margin);
-        width: calc(100% - var(--items-margin) - var(--items-margin));
     }
 }
 
