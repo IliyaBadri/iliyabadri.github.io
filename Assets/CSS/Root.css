@@ -1,0 +1,80 @@
+:root {
+    --color-1: #EEF5FF;
+    --color-2: #B4D4FF;
+    --color-3: #86B6F6;
+    --color-4: #176B87;
+    --items-margin: 10px;
+    --text-indent: 30px;
+    --round-edges: 5px;
+    --button-padding: 5px;
+    --font: 'Exo';
+}
+
+body.Style {
+    font-family: var(--font);
+    background-color: var(--color-1);
+}
+
+body.Scrollable {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body.FullScreen {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+div.FullScreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+div.CenterContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.ListInRows {
+    display: flex;
+    flex-direction: column;
+}
+
+div.ListInColumns {
+    display: flex;
+    flex-direction: row;
+}
+
+h1.Style {
+    font-weight: bolder;
+    font-size: clamp(2rem, 4vw, 5rem);
+}
+
+p.Style{
+    font-size: clamp(0.75rem, 1vw, 5rem);
+}
+
+p.CustomMargin {
+    margin-left: var(--text-indent);
+    margin-right: 10vw;
+}
+
+@media (max-width: 920px) {
+    p.CustomMargin {
+        margin-left: var(--text-indent);
+        margin-right: var(--items-margin);
+    }
+}
+
+  

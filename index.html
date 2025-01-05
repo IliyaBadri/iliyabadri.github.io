@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Hello there! I'm Iliya Badri. A software programmer and game developer.">
+  <link rel="shortcut icon" href="/Assets/Images/Favicon.png" type="image/png">
+  <link rel="manifest" href="/Assets/JSON/manifest.json">
+  <link rel="stylesheet" href="/Assets/CSS/Font.css" >
+  <link rel="stylesheet" href="/Assets/CSS/Buttons.css">
+  <link rel="stylesheet" href="/Assets/CSS/Navbar.css">
+  <link rel="stylesheet" href="/Assets/CSS/Root.css">
+  
+  <title>Iliya Badri</title>
+</head>
+<body class="Style FullScreen">
+  <nav class="NavigationBar Transparent">
+    <button onclick="window.location.href='/'" class="Style TransparentOnLight Bolder NavigationLogo">Iliya Badri</button>
+    <button class="PanelOpener ColoredOnLight NavigationItem" onclick="ToggleMobileNavbar();"><img class="ButtonSized InDark" src="/Assets/Images/Icons/Menu.svg"></button>
+    <div class="NavigationItemList" id="ItemsList">
+      <button class="Style TransparentOnLight Bold NavigationItem" onclick="window.location.href='/About'">Learn more</button>
+    </div>
+  </nav>
+  <div class="FullScreen CenterContent ListInRows">
+    <h1 class="Style">Hello there! I'm Iliya Badri.</h1>
+    <div class="ListInColumns">
+      <p class="Style CustomMargin">Software programmer / Game developer</p>
+      <button class="Style ColoredOnLight Bold ResponsiveSize" onclick="window.location.href='/About'">More about me</button>
+    </div>
+  </div>
+  <script src="/Assets/JS/MobileNavbar.js"></script>
+</body>
+</html>

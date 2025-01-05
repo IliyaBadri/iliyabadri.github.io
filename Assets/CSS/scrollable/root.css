@@ -1,0 +1,40 @@
+:root {
+    --color-1: #EEF5FF;
+    --color-2: #B4D4FF;
+    --color-3: #86B6F6;
+    --color-4: #176B87;
+    --items-margin: 10px;
+    --font: 'Exo';
+    --navbar-height: 70px;
+}
+
+body.ea-fullscreen-body {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    font-family: var(--font);
+    background-color: var(--color-1);
+}
+
+div.ea-main-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--navbar-height);
+    margin-right: 20vw;
+    margin-left: 20vw;
+    flex-wrap: wrap;
+    width: calc(100% - 40vw);
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+div.ea-main-container div.ea-hero h1{
+    font-size: clamp(1.5rem, 4vw, 5rem);
+}
+
+@media (max-width: 920px) {
+    div.ea-main-container {
+        margin-right: var(--items-margin);
+        margin-left: var(--items-margin);
+        width: calc(100% - var(--items-margin) - var(--items-margin));
+    }
+}
