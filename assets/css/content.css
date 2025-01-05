@@ -11,7 +11,14 @@
     --border-width: 2px;
 }
 
-div.ea-heading {
+div.MainContentContainer {
+    width: 60%;
+    margin-top: calc(var(--vertical-margin) * 2);
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+div.Heading {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -19,36 +26,44 @@ div.ea-heading {
     box-shadow: 0px var(--border-width) 0px var(--color-4);
 }
 
-div.ea-pure-paragraph{
+div.PureParagraph{
     margin: var(--items-margin);
     margin-top: var(--vertical-margin);
     font-size: clamp(0.5rem, 2.5vw, 1.5rem);
 }
 
-div.ea-image-paragraph {
+div.ImageParagraph {
     margin-top: var(--vertical-margin);
     padding: var(--padding);
     display: flex;
     
 }
 
-div.ea-image-paragraph div.ea-image {
+div.ImageParagraph div.Image {
     display: flex;
     flex-direction: column;
 }
 
-div.ea-image-paragraph div.ea-image img {
+div.ImageParagraph div.Image img {
     margin-top: var(--items-margin);
     border-radius: var(--round-edges);
     width: 100%;
     object-fit: contain;
 }
 
-div.ea-image-paragraph div.ea-paragraph {
+div.ImageParagraph div.Paragraph {
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-size: clamp(0.5rem, 2.5vw, 1.5rem);
     margin-left: var(--items-margin);
     margin-right: var(--items-margin);
+}
+
+@media (max-width: 920px) {
+    div.MainContentContainer {
+        width: calc(100% - var(--items-margin) * 3 );
+        margin-left: var(--items-margin);
+        margin-right: calc(var(--items-margin) * 2);
+    }
 }

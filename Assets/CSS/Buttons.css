@@ -45,6 +45,18 @@ button.TransparentOnLight:hover {
     color: var(--color-3);
 }
 
+button.TransparentOnDark {
+    transition: color 0.3s ease;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--color-1);
+    border: none;
+}
+
+button.TransparentOnDark:hover {
+    transition: color 0.3s ease;
+    color: var(--color-2);
+}
+
 button.ColoredOnLight {
     transition: background-color 0.3s ease;
     background-color: var(--color-4);

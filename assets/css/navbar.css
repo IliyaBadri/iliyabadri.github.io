@@ -12,12 +12,20 @@
 }
 
 nav.NavigationBar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: calc(var(--items-height) + var(--items-margin) + var(--items-margin));
     z-index: 900;
+}
+
+nav.Transparent {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+nav.Colored {
+    background-color: var(--color-4);
 }
 
 img.ButtonSized {
@@ -60,7 +68,7 @@ div.NavigationItemList {
 
     div.NavigationItemList {
         position: absolute;
-        background-color: var(--color-4);
+        background-color: var(--color-2);
         top: 0;
         left: 0;
         height: 100vh;
@@ -70,6 +78,14 @@ div.NavigationItemList {
     }
 
     button.NavigationItem {
-        color: var(--color-1);
+        color: var(--color-4);
+    }
+
+    button.NavigationItem:hover {
+        color: var(--color-3);
+    }
+
+    button.NavigationLogo {
+        margin-left: var(--items-margin);
     }
 }

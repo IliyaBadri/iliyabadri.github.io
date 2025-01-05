@@ -1,6 +1,6 @@
 mobile_navbar_open = false
-function toggle_mobile_navbar(){
-    mobile_navbar = document.getElementById("items-list");
+function ToggleMobileNavbar(){
+    mobile_navbar = document.getElementById("ItemsList");
     mobile_navbar_open = !mobile_navbar_open;
     if(mobile_navbar_open){
         mobile_navbar.style.display = "flex";
@@ -13,11 +13,11 @@ function toggle_mobile_navbar(){
 
 window.onresize = function(event) {
     var new_screen_width = window.innerWidth;
-    respond(new_screen_width);
+    Respond(new_screen_width);
 };
 
-function respond(screen_width){
-    mobile_navbar = document.getElementById("items-list");
+function Respond(screen_width){
+    mobile_navbar = document.getElementById("ItemsList");
     if (screen_width >= 920){
         mobile_navbar_open = false;
         mobile_navbar.style.display = "block";
@@ -28,4 +28,4 @@ function respond(screen_width){
 }
 
 var current_screen_width = window.innerWidth;
-respond(current_screen_width);
+Respond(current_screen_width);
